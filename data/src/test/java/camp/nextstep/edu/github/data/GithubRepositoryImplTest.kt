@@ -23,6 +23,7 @@ class GithubRepositoryImplTest {
 
     @Test
     fun `Github Repository 로드하여 첫번째 Repo 객체를 검증한다`() = runTest {
+        //given
         val response = MockResponse()
             .setBody(File("src/test/resources/repositories.json").readText())
             .setResponseCode(200)
@@ -34,8 +35,10 @@ class GithubRepositoryImplTest {
             "**Grit is no longer maintained. Check out libgit2/rugged.** Grit gives you object oriented read/write access to Git repositories via Ruby."
         )
 
+        //when
         val actual = repository.getRepositories().firstOrNull()
 
+        //then
         assertThat(actual).isEqualTo(expected)
     }
 }
